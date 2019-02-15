@@ -1,0 +1,8 @@
+.logout {
+    background-color: rgb(38, 55, 131);
+    color:black;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+    margin-left: 25%;
+}

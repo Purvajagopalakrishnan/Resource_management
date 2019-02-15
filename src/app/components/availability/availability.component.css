@@ -1,0 +1,78 @@
+.page-body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(224, 154, 24);
+}
+.validator {
+    color: red;
+    text-align: center;
+}
+.form-input {
+    width: 76%;
+    padding: 12px 20px;
+    margin-left: 46px;
+    border: 2px solid black;
+    box-sizing: border-box;
+    font-weight: 700;
+    border-radius: 20px;
+    text-align: center;
+    margin-bottom: 27px;
+}
+.availability-main{
+    background-color: blue;
+    width: 400px;
+    height:400px;
+    box-shadow: 0px 11px 35px 2px gray;
+    margin-left: 35%
+}
+.form-label {
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+}
+.availability-form {
+    border: 3px solid gray;
+    text-align: center;
+}
+.availability-button {
+    background-color: rgb(218, 91, 33);
+    color: white;
+    padding: 14px 20px;
+    margin-left: 25%;
+    border: none;
+    cursor: pointer;
+}
+.availability-button:hover {
+    opacity: 0.7;
+}
+.container {
+    padding: 16px;
+    border: 3px solid rgb(226, 11, 208);
+}
+.page-header{
+    background: greenyellow;
+    padding-top: 20px;
+    text-align: center;
+}
+.booking-form {
+    border: 3px solid rgb(15, 199, 40);
+    text-align: center;
+}
+.book-button {
+    background-color: rgb(70, 158, 129);
+    color: black;
+    padding: 14px 20px;
+    margin-left: 35%;
+    border: none;
+    cursor: pointer;
+}
+.book-button:hover {
+    opacity: 0.7;
+}
+.book-main{
+    background-color: lightcoral;
+    width: 400px;
+    height:400px;
+    box-shadow: 0px 11px 35px 2px gray;
+    margin-left: 35%
+}
+

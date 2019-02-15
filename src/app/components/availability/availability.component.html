@@ -1,0 +1,69 @@
+<div class="availability-main">
+  <div class="page-header">
+    <h2>Check availability Status</h2>
+  </div>
+  <div class="page-body">
+    <form [formGroup]="AvailabilityForm" class="Availability-form" (ngSubmit)="OnCheckAvailability()">
+      <div class="container"> 
+        <div class="form-group">
+          <div class="form-label">
+            <label for="Startdate">Start Date:</label> <br>
+          </div>
+          <input type="date" formControlName="Startdate" class="form-control form-input" [ngClass]="{ 'is-invalid': submitted && form.Startdate.errors}" /> <br>
+          <div *ngIf="submitted && form.Startdate.errors" class="invalid-feedback">
+            <div class="validator" *ngIf="form.Startdate.errors.required">Start date is required</div>
+          </div>
+        </div>
+        <div class="form-group" >
+          <div class="form-label">
+            <label for="Enddate">End Date:</label>
+          </div>
+          <input type="date" formControlName="Enddate" class="form-control form-input" [ngClass]="{ 'is-invalid': submitted && form.Enddate.errors}" /> <br>
+          <div *ngIf="submitted && form.Enddate.errors" class="invalid-feedback">
+            <div class="validator" *ngIf="form.Enddate.errors.required">End date is required</div>
+          </div>
+        </div>
+        <div class="form-group" >
+          <button type="submit" class="btn btn-primary" class="availability-button">Check Availability</button> <br>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<br>
+<br>
+<div *ngIf="show_form">
+  <div class="book-main">
+    <div class="page-header">
+      <h2>Book Resource here !!</h2>
+    </div>
+    <div class="page-body">
+      <form [formGroup]="BookingForm" class="Booking-form" (ngSubmit)="OnClickBook()">
+        <div class="container">
+          <div class= "form-group">
+            <div class="form-label">
+              <label>Startdate:</label> <br>
+            </div>
+              <input type="date" formControlName="Startdate" class="form-control form-input" [ngClass]="{ 'is-invalid': submitted && bookform.Startdate.errors}" /> <br>
+                <div *ngIf="submitted && bookform.Startdate.errors" class="invalid-feedback">
+                  <div class="validator" *ngIf="bookform.Startdate.errors.required">Start date is required</div>
+                </div>
+            </div>
+          <div class="form-group" >
+            <div class="form-label">
+              <label>End Date:</label>
+            </div>
+              <input type="date" formControlName="Enddate" class="form-control form-input" [ngClass]="{ 'is-invalid': submitted && bookform.Enddate.errors}" /> <br>
+                <div *ngIf="submitted && bookform.Enddate.errors" class="invalid-feedback">
+                  <div class="validator" *ngIf="bookform.Enddate.errors.required">End date is required</div>
+                </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" class="book-button">Book</button> <br>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
