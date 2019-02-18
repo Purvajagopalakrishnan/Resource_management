@@ -14,7 +14,6 @@ export class FinalViewComponent implements OnInit {
   }
   OnLogout()
   {
-    this.router.navigate(['']);
+    this.router.navigate(["/login"]);
   }
-
 }
