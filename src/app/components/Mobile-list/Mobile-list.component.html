@@ -1,0 +1,25 @@
+<div class="head-img">
+  <img src="/assets/images/img5.png">
+</div>
+<div class="title">
+  <h1>{{pageTitle}}</h1>
+</div>
+<body>
+  <div class="navigation-bar">
+    <button type="submit" (click)="OnClickMobile()" class="select-resource">Mobiles</button> |
+    <button type="submit" (click)="OnClickLaptop()" class="select-resource">Laptops</button>
+  </div> <br><br>
+  <div *ngIf="show_table">
+    <table class="resource-table">
+      <tr>
+        <th class="resource-th">Id</th>
+        <th class="resource-th">Resource Name</th>
+        <th class="resource-th">Resource Type</th>
+      <tr *ngFor="let resource of Mobile_list_resource">
+        <td class="resource-td" (click)="OnClickID(resource.ResourceId)">{{resource.ResourceId}}</td>
+        <td class="resource-td">{{resource.Resource_Name}}</td>
+        <td class="resource-td">{{resource.Resource_type}}</td>
+      </tr>
+    </table>
+  </div>
+</body>

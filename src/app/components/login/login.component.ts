@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -13,11 +13,11 @@ export class LoginComponent implements OnInit {
   pageTitle = 'Resources Management system';
   loginForm: FormGroup;
   submitted = false;
-  userdetails:any;
-  get form() { 
+  Login_User_details: any;
+  get loginform() { 
     return this.loginForm.controls;
-   }
-  constructor(  private formBuilder: FormBuilder,private authservice:AuthenticationService,private router:Router,private localstorage:LocalStorageService) { }
+  }
+  constructor(private formBuilder: FormBuilder ,private loginservice: LoginService, private router: Router, private localstorage: LocalStorageService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -25,23 +25,19 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
   }
- 
   OnLogin() {
     this.submitted = true;
     if (this.loginForm.invalid) {
         return;
       }
-      this.localstorage.setitem("Email_id",<string>this.loginForm.get("email_id").value);
-      this.authservice.login(this.form.email_id.value,this.form.password.value)
+      this.localstorage.setitem("Email_id", <string>this.loginForm.get("email_id").value);
+      this.loginservice.login(this.loginform.email_id.value, this.loginform.password.value)
       .subscribe(
         userdetails => {
-          this.userdetails = userdetails;
-          console.log(this.userdetails);
-          this.router.navigate(["/resourcelist"])
+          this.Login_User_details = userdetails;
+          this.router.navigate(["/mobilelist"]);
         },
-        error => console.log('http error',error),
+        error => {}
       );
-
-
   }
 }

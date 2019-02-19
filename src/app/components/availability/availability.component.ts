@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AvailabilityService } from 'src/app/services/availability.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { BookingResourceService } from 'src/app/services/booking-resource.service';
+import { CheckAvailabilityService } from 'src/app/services/check-availability.service';
+import { BookResource } from 'src/app/Class&Interface/book-resource';
 
 @Component({
   selector: 'app-availability',
@@ -12,29 +13,29 @@ import { BookingResourceService } from 'src/app/services/booking-resource.servic
 })
 
 export class AvailabilityComponent implements OnInit {
-  pageTitle= 'Resource Management System';
+  pageTitle = 'Resource Management System';
   AvailabilityForm: FormGroup;
   BookingForm: FormGroup;
   submitted = false;
-  id:number;
+  Route_parameter_id: number;
   bookingdetails: any;
-  public show_form: boolean = false
+  public show_form: boolean = false;
 
-  get form() {
+  get Availabilityform() {
     return this.AvailabilityForm.controls;
   }
-  get bookform(){
+  get bookform() {
     return this.BookingForm.controls;
   }
 
-  constructor(public formBuilder: FormBuilder,private router: Router,private route: ActivatedRoute,private availabilityservice:AvailabilityService,private localstorage:LocalStorageService,private bookresourceservice:BookingResourceService) { }
+  constructor(public formBuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private availabilityservice: CheckAvailabilityService, private localstorage: LocalStorageService, private bookresourceservice: BookingResourceService) { }
   ngOnInit() {
-    this.AvailabilityForm = this.formBuilder.group({
-    Startdate: ['', Validators.required],
-    Enddate:   ['',Validators.required]
+    this.AvailabilityForm = this.formBuilder.group ({
+      Startdate: ['', Validators.required],
+      Enddate: ['',Validators.required]
     });
     this.route.params.subscribe(params => {
-    this.id = params['id']
+      this.Route_parameter_id = params['id']
     })
   }
   OnCheckAvailability() {
@@ -42,40 +43,35 @@ export class AvailabilityComponent implements OnInit {
     if(this.AvailabilityForm.invalid){
       return;
     }
-    var resource_id= this.id
-    this.availabilityservice.CheckAvailability(this.form.Startdate.value,this.form.Enddate.value,resource_id)
+    var resource_id = this.Route_parameter_id;
+    this.availabilityservice.CheckAvailability(this.Availabilityform.Startdate.value,this.Availabilityform.Enddate.value,resource_id)
     .subscribe(
       data => {
-        console.log(data);
-        if(data==false)
+        if (data==false)
         {
           this.show_form = true;
-          this.BookingForm = this.formBuilder.group({
+          this.BookingForm = this.formBuilder.group ({
             Startdate: ['',Validators.required],
-            Enddate:   ['',Validators.required]
+            Enddate:['',Validators.required]
           });
         }
-        else{
+        else {
           alert("The requested device is not available on the specified date");
         }
       },
-      error => {
-        console.log(error);
-        
-      }
+      error => {}
     );
   }
   OnClickBook() {
-    var lstorage=this.localstorage.RetrieveItem("Email_id");
-    var res_id=this.id
-    this.bookresourceservice.BookResource(this.bookform.Startdate.value,this.bookform.Enddate.value,res_id,lstorage)
+    var lstorage = this.localstorage.RetrieveItem("Email_id");
+    var available_resource_id = this.Route_parameter_id;
+    this.bookresourceservice.BookResource(this.bookform.Startdate.value,this.bookform.Enddate.value,available_resource_id,lstorage)
     .subscribe(
       bookingdetails => {
         this.bookingdetails = bookingdetails;
-        console.log(this.bookingdetails);
-        this.router.navigate(["/completion"])
+        this.router.navigate(["/completion"]);
       },
-      error => console.log('http error',error),
+      error => {}
     );
   }
 }

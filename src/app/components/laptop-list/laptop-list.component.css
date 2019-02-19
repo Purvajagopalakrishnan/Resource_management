@@ -1,0 +1,30 @@
+.resource-table {
+    border-collapse: collapse; 
+    width: 100%;
+    border: 1px solid black;
+}
+.resource-th {
+    padding: 15px;
+    text-align: left;
+    background-color: brown;
+    color: white;
+}
+.resource-td {
+    border: 1px solid black;
+    padding: 15px;
+}
+.navigation-bar {
+    overflow: hidden;
+    background-color: #333;
+}
+.head-img {
+    margin-left: 45%
+}
+.select-resource {
+    background-color: rgb(143, 165, 84);
+    color:black;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+}
+  
